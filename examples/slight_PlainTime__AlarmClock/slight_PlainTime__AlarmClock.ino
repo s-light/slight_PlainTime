@@ -16,13 +16,12 @@
     This Example Sketch is released as CC0
 ******************************************/
 
-#include <cstdint>
 #include <slight_PlainTime.h>
 
-SimpleTime currentTime = SimpleTime(millis());
+slight_PlainTime currentTime = slight_PlainTime(millis());
 
 // hours minutes seconds
-SimpleTime alarm = SimpleTime(0, 0, 13);
+slight_PlainTime alarm = slight_PlainTime(0, 0, 13);
 
 uint32_t updateLast = 0;
 const uint32_t updateInterval = 1000;

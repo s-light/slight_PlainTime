@@ -18,8 +18,7 @@
 
 #include <slight_PlainTime.h>
 
-// simpletime
-SimpleTime myTime = SimpleTime(millis());
+slight_PlainTime myTime = slight_PlainTime(millis());
 
 void setup() {
     delay(1000);

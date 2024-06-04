@@ -37,15 +37,14 @@ SOFTWARE.
 #include "Print.h"
 #include "WString.h"
 #include <Arduino.h>
-#include <cstdint>
 
-class SimpleTime {
+class slight_PlainTime {
     int32_t time_ms;
 
 public:
-    SimpleTime() {}
-    SimpleTime(int32_t time_ms_) { setTime(time_ms_); }
-    SimpleTime(int32_t hours, uint8_t minutes, uint8_t seconds) {
+    slight_PlainTime() {}
+    slight_PlainTime(int32_t time_ms_) { setTime(time_ms_); }
+    slight_PlainTime(int32_t hours, uint8_t minutes, uint8_t seconds) {
         addHours(hours);
         addMinutes(minutes);
         addSeconds(seconds);
@@ -66,19 +65,19 @@ public:
     uint8_t getSeconds() { return (time_ms % (1000 * 60) / 1000); }
     uint16_t getMilliseconds() { return (time_ms % 1000); }
 
-    SimpleTime &addHours(int32_t hours) {
+    slight_PlainTime &addHours(int32_t hours) {
         time_ms += hours * (1000 * 60 * 60);
         return *this;
     }
-    SimpleTime &addMinutes(uint8_t minutes) {
+    slight_PlainTime &addMinutes(uint8_t minutes) {
         time_ms += minutes * (1000 * 60);
         return *this;
     }
-    SimpleTime &addSeconds(uint8_t seconds) {
+    slight_PlainTime &addSeconds(uint8_t seconds) {
         time_ms += seconds * (1000);
         return *this;
     }
-    slight_PlainTime SimpleTime &addMilliseconds(uint16_t milliseconds) {
+    slight_PlainTime &addMilliseconds(uint16_t milliseconds) {
         time_ms += milliseconds;
         return *this;
     }
@@ -96,48 +95,48 @@ public:
     }
     void print(Stream &out) { out.print(format()); }
 
-    friend SimpleTime operator+(const SimpleTime &obj1,
-                                const SimpleTime &obj2) {
-        SimpleTime temp;
+    friend slight_PlainTime operator+(const slight_PlainTime &obj1,
+                                const slight_PlainTime &obj2) {
+        slight_PlainTime temp;
         temp.time_ms = obj1.time_ms + obj2.time_ms;
         return temp;
     }
-    friend SimpleTime operator-(const SimpleTime &obj1,
-                                const SimpleTime &obj2) {
-        SimpleTime temp;
+    friend slight_PlainTime operator-(const slight_PlainTime &obj1,
+                                const slight_PlainTime &obj2) {
+        slight_PlainTime temp;
         temp.time_ms = obj1.time_ms - obj2.time_ms;
         return temp;
     }
 
     // compound assignment
-    SimpleTime &operator+=(const SimpleTime &rhs) {
+    slight_PlainTime &operator+=(const slight_PlainTime &rhs) {
         // (does not need to be a member, but often is, to modify the private
         // members)
         time_ms += rhs.time_ms;
         return *this; // return the result by reference
     }
-    SimpleTime &operator-=(const SimpleTime &rhs) {
+    slight_PlainTime &operator-=(const slight_PlainTime &rhs) {
         time_ms -= rhs.time_ms;
         return *this;
     }
 
     // https://en.cppreference.com/w/cpp/language/operators#Comparison_operators
-    friend bool operator<(const SimpleTime &lhs, const SimpleTime &rhs) {
+    friend bool operator<(const slight_PlainTime &lhs, const slight_PlainTime &rhs) {
         return lhs.time_ms < rhs.time_ms;
     }
-    friend bool operator>(const SimpleTime &lhs, const SimpleTime &rhs) {
+    friend bool operator>(const slight_PlainTime &lhs, const slight_PlainTime &rhs) {
         return rhs < lhs;
     }
-    friend bool operator<=(const SimpleTime &lhs, const SimpleTime &rhs) {
+    friend bool operator<=(const slight_PlainTime &lhs, const slight_PlainTime &rhs) {
         return !(lhs > rhs);
     }
-    friend bool operator>=(const SimpleTime &lhs, const SimpleTime &rhs) {
+    friend bool operator>=(const slight_PlainTime &lhs, const slight_PlainTime &rhs) {
         return !(lhs < rhs);
     }
-    friend bool operator==(const SimpleTime &lhs, const SimpleTime &rhs) {
+    friend bool operator==(const slight_PlainTime &lhs, const slight_PlainTime &rhs) {
         return lhs.time_ms == rhs.time_ms;
     }
-    friend bool operator!=(const SimpleTime &lhs, const SimpleTime &rhs) {
+    friend bool operator!=(const slight_PlainTime &lhs, const slight_PlainTime &rhs) {
         return !(lhs == rhs);
     }
 };
