@@ -1,5 +1,5 @@
 # slight_PlainTime
-Arduino library with very simple / basic time / clock formating helpers.
+Arduino library with very simple / basic time / clock formatting helpers.
 
 
 this is really a very simple basic wrapper..
